@@ -1,0 +1,30 @@
+
+DES Encryption in CBC Mode - Simplified Explanation
+
+1. **DES (Data Encryption Standard)**:
+   - DES is an encryption algorithm that transforms plain text into unreadable text (ciphertext) using a secret key.
+   - It takes a **64-bit block of data** and a **56-bit key** to perform multiple operations (permutations, S-box substitutions, etc.) on the data to make it secure.
+
+2. **CBC Mode**:
+   - In CBC mode, data is encrypted in blocks. Before encrypting each block, it's **XORed** (combined using the logical operation XOR) with the previous block's encrypted output (or an initial value for the first block).
+   - This makes it more secure because each block depends on the previous one, so even if the same data is encrypted multiple times, the results will be different.
+
+3. **Steps in the project**:
+   - **Padding**: The message (plaintext) is padded to make sure its length is a multiple of 8 bytes, which is necessary for DES.
+   - **Initial Permutation (IP)**: The first step in DES is to permute (shuffle) the data using a predefined table (IP).
+   - **Rounds**: The data goes through **16 rounds** of transformation, each including:
+     - Expansion of one part of the data.
+     - Mixing with a round key.
+     - Substituting values using **S-boxes** (look-up tables).
+     - Final permutation (P).
+   - **Final Permutation (FP)**: After all rounds, the halves of the data are swapped and permuted again to get the final encrypted output.
+   - **Encryption**: The data is then split into 8-byte blocks. Each block is encrypted, and the previous block's ciphertext is used to modify the next block (this is the CBC mode).
+
+4. **Key and IV**:
+   - **Key**: The secret key used for encryption and decryption (like a password).
+   - **IV (Initialization Vector)**: A random value used at the start of encryption to ensure the output is different even if the same plaintext is encrypted multiple times.
+
+### Summary:
+- The project involves encrypting data using **DES in CBC mode** step-by-step.
+- It uses **permutations, S-boxes, and XOR operations** to make the data unreadable.
+- This process ensures that even if someone intercepts the encrypted message, they won’t be able to read it without the correct key.
